@@ -3,7 +3,10 @@
 ## Table of contents
 
 - [Table of contents](#table-of-contents)
-- [Course Summary](#course-summary)
+- [About this course](#about-this-course)
+- [Supervised ML \& Sentiment Analysis](#supervised-ml--sentiment-analysis)
+- [Vocabulary \& Feature Extraction](#vocabulary--feature-extraction)
+- [Feature Extraction with Frequencies](#feature-extraction-with-frequencies)
 - [Vector Space Models](#vector-space-models)
 - [Word by Word and Word by Doc](#word-by-word-and-word-by-doc)
   - [Word by Word Design](#word-by-word-design)
@@ -18,7 +21,58 @@
 - [PCA algorithm](#pca-algorithm)
 - [LAB - Another explanation about PCA](#lab---another-explanation-about-pca)
 
-## Course Summary
+## About this course
+
+[back to TOC](#table-of-contents)
+
+In Course 1 of the Natural Language Processing Specialization, you will:
+
+1. Perform sentiment analysis of tweets using logistic regression and then naïve Bayes
+2. Use vector space models to discover relationships between words and use PCA to reduce the dimensionality of the vector space and visualize those relationships
+3. Write a simple English to French translation algorithm using pre-computed word embeddings and locality-sensitive hashing to relate words via approximate k-nearest neighbor search.  
+
+By the end of this Specialization, you will have designed NLP applications that perform question-answering and sentiment analysis, created tools to translate languages and summarize text, and even built a chatbot!
+
+This Specialization is designed and taught by two experts in NLP, machine learning, and deep learning. Younes Bensouda Mourri is an Instructor of AI at Stanford University who also helped build the Deep Learning Specialization. Łukasz Kaiser is a Staff Research Scientist at Google Brain and the co-author of Tensorflow, the Tensor2Tensor and Trax libraries, and the Transformer paper.
+
+## Supervised ML & Sentiment Analysis
+
+[back to TOC](#table-of-contents)
+
+In supervised machine learning, you usually have an input $X$, which goes into your prediction function to get your $\hat Y$. You can then compare your prediction with the true value $Y$. This gives you your cost which you use to update the parameters $\theta$. The following image, summarizes the process.
+![Alt text](images/C1W1N1_01.png)
+
+To perform sentiment analysis on a tweet, you first have to represent the text (i.e. "I am happy because I am learning NLP ") as features, you then train your logistic regression classifier, and then you can use it to classify the text.
+![Alt text](images/C1W1N1_02.png)
+
+Note that in this case, you either classify 1, for a positive sentiment, or 0, for a negative sentiment.
+
+## Vocabulary & Feature Extraction
+
+[back to TOC](#table-of-contents)
+
+Given a tweet, or some text, you can represent it as a vector of dimension $V$, where $V$ corresponds to your vocabulary size. If you had the tweet "I am happy because I am learning NLP", then you would put a 1 in the corresponding index for any word in the tweet, and a 0 otherwise.
+![Alt text](images/C1W1N2_01.png)
+
+As you can see, as $V$ gets larger, the vector becomes more sparse. Furthermore, we end up having many more features and end up training $\theta$ $V$ parameters. This could result in larger training time, and large prediction time.
+
+## Feature Extraction with Frequencies
+
+[back to TOC](#table-of-contents)
+
+Given a corpus with positive and negative tweets as follows:
+![Alt text](images/C1W1N3_01.png)
+
+You have to encode each tweet as a vector. Previously, this vector was of dimension $V$. Now, as you will see in the upcoming videos, you will represent it with a vector of dimension $3$. To do so, you have to create a dictionary to map the word, and the class it appeared in (positive or negative) to the number of times that word appeared in its corresponding class.
+![Alt text](images/C1W1N3_02.png)
+
+In the past two videos, we call this dictionary `freqs`. In the table above, you can see how words like happy and sad tend to take clear sides, while other words like "I, am" tend to be more neutral. Given this dictionary and the tweet, "I am sad, I am not learning NLP", you can create a vector corresponding to the feature as follows:
+![Alt text](images/C1W1N3_03.png)
+
+To encode the negative feature, you can do the same thing.
+![Alt text](images/C1W1N3_04.png)
+
+Hence you end up getting the following feature vector $[1,8,11]$. $1$ corresponds to the bias, $8$ the positive feature, and $11$ the negative feature.
 
 ## Vector Space Models
 
