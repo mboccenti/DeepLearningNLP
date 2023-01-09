@@ -5,4 +5,4 @@ One of the issues with euclidean distance is that it is not always accurate and 
 
 Normally the **food** corpus and the **agriculture** corpus are more similar because they have the same proportion of words. However the food corpus is much smaller than the agriculture corpus. To further clarify, although the history corpus and the agriculture corpus are different, they have a smaller euclidean distance. Hence $d_2 < d_1$
 
-To solve this problem, we look at the cosine between the vectors. This allows us to compare $\Beta$ and $\alpha$.
+To solve this problem, we look at the cosine between the vectors. This allows us to compare $\beta$ and $\alpha$.
