@@ -8,6 +8,7 @@
 - [Word by Word and Word by Doc](#word-by-word-and-word-by-doc)
   - [Word by Word Design](#word-by-word-design)
   - [Word by Document Design](#word-by-document-design)
+- [LAB - Linear algebra in Python with Numpy](#lab---linear-algebra-in-python-with-numpy)
 - [Euclidian Distance](#euclidian-distance)
 - [Cosine Similarity: Intuition](#cosine-similarity-intuition)
 - [Cosine Similarity](#cosine-similarity)
@@ -46,6 +47,12 @@ You can represent the entertainment category, as a vector $v = [500, 7000]$. You
 ![Alt text](images/C1W3N2_03.png)
 
 Later this week, you will see how you can use the angle between two vectors to measure similarity.
+
+## LAB - Linear algebra in Python with Numpy
+
+[back to TOC](#table-of-contents)
+
+Please go through this [lecture notebook](Labs/Week%203/C1_W3_lecture_nb_01_linear_algebra.ipynb) to practice about the basic linear algebra concepts in Python using a very powerful library called **Numpy**. This will help prepare you for the graded assignment at the end of this week.
 
 ## Euclidian Distance
 
