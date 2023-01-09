@@ -13,7 +13,10 @@
 - [Cosine Similarity: Intuition](#cosine-similarity-intuition)
 - [Cosine Similarity](#cosine-similarity)
 - [Manipulating Words in Vector Spaces](#manipulating-words-in-vector-spaces)
+- [LAB - Manipulating word embeddings](#lab---manipulating-word-embeddings)
 - [Visualization and PCA](#visualization-and-pca)
+- [PCA algorithm](#pca-algorithm)
+- [LAB - Another explanation about PCA](#lab---another-explanation-about-pca)
 
 ## Course Summary
 
@@ -116,6 +119,62 @@ If $\hat v$ and $\hat w$ are the same then you get the numerator to be equal to 
 
 [back to TOC](#table-of-contents)
 
+You can use word vectors to actually extract patterns and identify certain structures in your text. For example:
+![Alt text](images/C1W3N6_01.png)
+
+You can use the word vector for Russia, USA, and DC to actually compute a **vector** that would be very similar to that of Moscow. You can then use cosine similarity of the **vector** with all the other word vectors you have and you can see that the vector of Moscow is the closest.
+![Alt text](images/C1W3N6_02.png)
+
+Note that the distance (and direction) between a country and its capital is relatively the same. Hence manipulating word vectors allows you identify patterns in the text.
+
+## LAB - Manipulating word embeddings
+
+[back to TOC](#table-of-contents)
+
+Please go through this [lecture notebook](Labs/Week%203/C1_W3_lecture_nb_02_manipulating_word_embeddings.ipynb) to apply the linear algebra concepts for the manipulation of word embeddings. This will help prepare you for the graded assignment at the end of this week.
+
 ## Visualization and PCA
 
 [back to TOC](#table-of-contents)
+
+Principal component analysis is an unsupervised learning algorithm which can be used to reduce the dimension of your data. As a result, it allows you to visualize your data. It tries to combine variances across features. Here is a concrete example of PCA:
+![Alt text](images/C1W3N7_01.png)
+
+Note that when doing PCA on this data, you will see that oil & gas are close to one another and town & city are also close to one another. To plot the data you can use PCA to go from $d>2$ dimensions to $d=2$.
+![Alt text](images/C1W3N7_02.png)
+
+Those are the results of plotting a couple of vectors in two dimensions. Note that words with similar part of speech (POS) tags are next to one another. This is because many of the training algorithms learn words by identifying the neighboring words. Thus, words with similar POS tags tend to be found in similar locations. An interesting insight is that synonyms and antonyms tend to be found next to each other in the plot. Why is that the case?
+
+## PCA algorithm
+
+[back to TOC](#table-of-contents)
+
+PCA is commonly used to reduce the dimension of your data. Intuitively the model collapses the data across principal components. You can think of the first principal component (in a 2D dataset) as the line where there is the most amount of variance. You can then collapse the data points on that line. Hence you went from 2D to 1D. You can generalize this intuition to several dimensions.
+![Alt text](images/C1W3N8_01.png)
+
+**Eigenvector**: the resulting vectors, also known as the uncorrelated features of your data
+
+**Eigenvalue**: the amount of information retained by each new feature. You can think of it as the variance in the eigenvector.
+
+Also each eigenvalue has a corresponding **eigenvector**. The eigenvalue tells you how much variance there is in the eigenvector. Here are the steps required to compute PCA:
+![Alt text](images/C1W4N8_02.png)
+
+**Steps to Compute PCA:**
+
+- Mean normalize your data
+- Compute the covariance matrix
+- Compute SVD on your covariance matrix. This returns $[U S V] = svd[\Sigma]$. The three matrices U, S, V are drawn above. U is labelled with eigenvectors, and S is labelled with eigenvalues.
+
+You can then use the first n columns of vector $U$, to get your new data by multiplying $XU[:, 0:n]$.
+
+## LAB - Another explanation about PCA
+
+[back to TOC](#table-of-contents)
+
+In this [lab](Labs/Week%203/C1_W3_lecture_nb_03_pca.ipynb), we are going to view another explanation about Principal Component Analysis(PCA). PCA is a statistical technique invented in 1901 by Karl Pearson that uses orthogonal transformations to map a set of variables into a set of linearly uncorrelated variables called Principal Components.
+
+PCA is based on the Singular Value Decomposition (SVD) of the Covariance Matrix of the original dataset. The Eigenvectors of such decomposition are used as a rotation matrix. The Eigenvectors are arranged in the rotation matrix in decreasing order according to its explained variance. This last term is related to the EigenValues of the SVD.
+
+PCA is a potent technique with applications ranging from simple space transformation, dimensionality reduction, and mixture separation from spectral information.
+
+Follow this lab to view another explanation for PCA. In this case, we are going to use the concept of rotation matrices applied to correlated random data, just as illustrated in the next picture.
