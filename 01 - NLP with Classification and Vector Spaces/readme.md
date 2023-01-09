@@ -8,6 +8,7 @@
 - [Vocabulary \& Feature Extraction](#vocabulary--feature-extraction)
 - [Feature Extraction with Frequencies](#feature-extraction-with-frequencies)
 - [Preprocessing](#preprocessing)
+- [LAB - Natural Language preprocessing](#lab---natural-language-preprocessing)
 - [Vector Space Models](#vector-space-models)
 - [Word by Word and Word by Doc](#word-by-word-and-word-by-doc)
   - [Word by Word Design](#word-by-word-design)
@@ -21,6 +22,11 @@
 - [Visualization and PCA](#visualization-and-pca)
 - [PCA algorithm](#pca-algorithm)
 - [LAB - Another explanation about PCA](#lab---another-explanation-about-pca)
+- [Transforming word vectors](#transforming-word-vectors)
+- [LAB - Vector manipulation in Python](#lab---vector-manipulation-in-python)
+- [K-nearest neighbors](#k-nearest-neighbors)
+- [Hash tables and hash functions](#hash-tables-and-hash-functions)
+- [LAB - Hash functions and multiplanes](#lab---hash-functions-and-multiplanes)
 
 ## About this course
 
@@ -92,6 +98,12 @@ For example the following tweet "@YMourri and @AndrewYNg are tuning a GREAT AI m
 ![Alt text](images/C1W1N4_01.png)
 
 $[tun, great, ai, model]$. Hence you can see how we eliminated handles, tokenized it into words, removed stop words, performed stemming, and converted everything to lower case.
+
+## LAB - Natural Language preprocessing
+
+[back to TOC](#table-of-contents)
+
+In this [lab](Labs/Week%201/C1_W1_lecture_nb_01_preprocessing.ipynb), we will be exploring how to preprocess tweets for sentiment analysis. We will provide a function for preprocessing tweets during this week's assignment, but it is still good to know what is going on under the hood. By the end of this lecture, you will see how to use the [NLTK](http://www.nltk.org) package to perform a preprocessing pipeline for Twitter datasets.
 
 ## Vector Space Models
 
@@ -230,7 +242,7 @@ PCA is commonly used to reduce the dimension of your data. Intuitively the model
 **Eigenvalue**: the amount of information retained by each new feature. You can think of it as the variance in the eigenvector.
 
 Also each eigenvalue has a corresponding **eigenvector**. The eigenvalue tells you how much variance there is in the eigenvector. Here are the steps required to compute PCA:
-![Alt text](images/C1W4N8_02.png)
+![Alt text](images/C1W3N8_02.png)
 
 **Steps to Compute PCA:**
 
@@ -251,3 +263,99 @@ PCA is based on the Singular Value Decomposition (SVD) of the Covariance Matrix 
 PCA is a potent technique with applications ranging from simple space transformation, dimensionality reduction, and mixture separation from spectral information.
 
 Follow this lab to view another explanation for PCA. In this case, we are going to use the concept of rotation matrices applied to correlated random data, just as illustrated in the next picture.
+
+## Transforming word vectors
+
+[back to TOC](#table-of-contents)
+
+In the previous week, I showed you how we can plot word vectors. Now, you will see how you can take a word vector and learn a mapping that will allow you to translate words by learning a "transformation matrix". Here is a visualization:
+
+![Alt text](images/C1W4N1_01.png)
+
+Note that the word "chat" in french means cat. You can learn that by taking the  vector corresponding to "cat" in english, multiplying it by a matrix that you learn and then you can use cosine similarity between the output and all the french vectors. You should see that the closest result is the vector which corresponds to "chat".
+
+Here is a visualization of that showing you the aligned vectors:
+
+![Alt text](images/C1W4N1_02.png)
+
+Note that $X$ corresponds to the matrix of english word vectors and YY corresponds to the matrix of french word vectors. $R$ is the mapping matrix.
+
+**Steps required to learn $R$:**
+
+- Initialize R
+- For loop
+
+$$
+Loss  = \| XR-Y \|_F
+$$
+$$
+g = \frac{d}{dR} Loss
+$$
+$$
+R = R- \alpha*g
+$$
+
+Here is an example to show you how the frobenius norm works.
+$$
+\begin{array}{l}\|\mathbf{X} \mathbf{R}-\mathbf{Y}\|_{F} \\ \mathbf{A}=\left(\begin{array}{ll}2 & 2 \\ 2 & 2\end{array}\right) \\ \left\|\mathbf{A}_{F}\right\|=\sqrt{2^{2}+2^{2}+2^{2}+2^{2}} \\ \left\|\mathbf{A}_{F}\right\|=4 \\ \|\mathbf{A}\|_{F} \equiv \sqrt{\sum_{i=1}^{m} \sum_{j=1}^{n}\left|a_{i j}\right|^{2}}\end{array}
+$$
+​
+In summary you are making use of the following:
+$$
+\begin{array}{l}\bullet \mathrm{XR} \approx \mathrm{Y} \\ \bullet \text { minimize }\|\mathrm{XR}-\mathrm{Y}\|_{F}^{2}\end{array}
+$$
+
+## LAB - Vector manipulation in Python
+
+[back to TOC](#table-of-contents)
+
+In this [lab](Labs/Week%204/C1_W4_lecture_nb_01_vector_manipulation.ipynb), you will have the opportunity to practice once again with the NumPy library. This time, we will explore some advanced operations with arrays and matrices.
+
+At the end of the previous module, we used PCA to transform a set of many variables into a set of only two uncorrelated variables. This process was made through a transformation of the data called rotation.
+
+In this week's assignment, you will need to find a transformation matrix from English to French vector space embeddings. Such a transformation matrix is nothing else but a matrix that rotates and scales vector spaces.
+
+In this notebook, we will explain in detail the rotation transformation.
+
+## K-nearest neighbors
+
+[back to TOC](#table-of-contents)
+
+After you have computed the output of $XR$ you get a vector. You then need to find the most similar vectors to your output. Here is a visual example:
+![Alt text](images/C1W4N2_01.png)
+
+In the video, we mentioned if you were in San Francisco, and you had friends all over the world,  you would want to find the nearest neighbors. To do that it might be expensive to go over all the countries one at a time. So we will introduce hashing to show you how you can do a look up much faster.
+
+## Hash tables and hash functions
+
+[back to TOC](#table-of-contents)
+
+Imagine you had to cluster the following figures into different buckets:
+![Alt text](images/C1W4N3_01.png)
+
+Note that the figures blue, red, and gray ones would each be clustered with each other
+![Alt text](images/C1W4N3_02.png)
+
+You can think of hash function as a function that takes data of arbitrary sizes and maps it to a fixed value. The values returned are known as *hash values* or even *hashes*.
+![Alt text](images/C1W4N3_03.png)
+
+The diagram above shows a concrete example of a hash function which takes a vector and returns a value. Then you can mod that value by the number of buckets and put that number in its corresponding bucket. For example, 14 is in the 4th bucker, 17 & 97 are in the 7th bucket. Let's take a look at how you can do it using some code.
+![Alt text](images/C1W4N3_04.png)
+
+The code snippet above creates a basic hash table which consists of hashed values inside their buckets. **hash_function** takes in *value_l* (a list of values to be hashed) and *n_buckets* and mods the value by the buckets. Now to create the *hash_table*, you first initialize a list to be of dimension *n_buckets* (each value will go to a bucket). For each value in your list of values, you will feed it into your **hash_function**, get the *hash_value*, and append it to the list of values in the corresponding bucket.
+
+Now given an input, you don't have to compare it to all the other examples, you can just compare it to all the values in the same *hash_bucket* that input has been hashed to.
+
+When hashing you sometimes want similar words or similar numbers to be hashed to the same bucket. To do this, you will use “locality sensitive hashing.”  Locality is another word for “location”.  So locality sensitive hashing is a hashing method that cares very deeply about assigning items based on where they’re located in vector space.
+
+## LAB - Hash functions and multiplanes
+
+[back to TOC](#table-of-contents)
+
+In this [lab](Labs/Week%204/C1_W4_lecture_nb_02_hash_functions_and_multiplanes.ipynb), we are going to practice the most important concepts related to the hash functions explained in the videos. You will be using these in this week's assignment.
+
+A key point for the lookup using hash functions is the calculation of the hash key or bucket id that we assign for a given entry. In this notebook, we will cover:
+
+- Basic hash tables
+- Multiplanes
+- Random planes
