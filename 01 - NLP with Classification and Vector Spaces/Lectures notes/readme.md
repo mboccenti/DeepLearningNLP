@@ -2,7 +2,7 @@
 
 Lecture notes of the **C1 - Natural Language Processing with Classification and Vector Spaces** of the Natural Language Specialisation.
 
-Note: These slides haven’t been maintained, and that you might find missing topics and incorrect information in them, as opposed to lecture videos, where we try to update the misinformation or errors as soon as we are aware of them. We encourage that you make your own notes.
+**Note**: These slides haven’t been maintained, and that you might find missing topics and incorrect information in them, as opposed to lecture videos, where we try to update the misinformation or errors as soon as we are aware of them. DeepLearning.Ai encourages that you make your own notes.
 
 ## Copyright Notice
 
