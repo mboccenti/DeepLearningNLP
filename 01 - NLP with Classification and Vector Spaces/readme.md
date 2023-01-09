@@ -7,6 +7,7 @@
 - [Supervised ML \& Sentiment Analysis](#supervised-ml--sentiment-analysis)
 - [Vocabulary \& Feature Extraction](#vocabulary--feature-extraction)
 - [Feature Extraction with Frequencies](#feature-extraction-with-frequencies)
+- [Preprocessing](#preprocessing)
 - [Vector Space Models](#vector-space-models)
 - [Word by Word and Word by Doc](#word-by-word-and-word-by-doc)
   - [Word by Word Design](#word-by-word-design)
@@ -73,6 +74,24 @@ To encode the negative feature, you can do the same thing.
 ![Alt text](images/C1W1N3_04.png)
 
 Hence you end up getting the following feature vector $[1,8,11]$. $1$ corresponds to the bias, $8$ the positive feature, and $11$ the negative feature.
+
+## Preprocessing
+
+[back to TOC](#table-of-contents)
+
+When preprocessing, you have to perform the following:
+
+1. Eliminate handles and URLs
+2. Tokenize the string into words.
+3. Remove stop words like "and, is, a, on, etc."
+4. Stemming- or convert every word to its stem. Like dancer, dancing, danced, becomes 'danc'. You can use porter stemmer to take care of this.
+5. Convert all your words to lower case.
+
+For example the following tweet "@YMourri and @AndrewYNg are tuning a GREAT AI model at <https://deeplearning.ai>!!!" after preprocessing becomes
+
+![Alt text](images/C1W1N4_01.png)
+
+$[tun, great, ai, model]$. Hence you can see how we eliminated handles, tokenized it into words, removed stop words, performed stemming, and converted everything to lower case.
 
 ## Vector Space Models
 
