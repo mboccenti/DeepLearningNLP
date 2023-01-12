@@ -1,6 +1,6 @@
 # DeepLearning.AI Lecture Notes - Nov '21
 
-Lecture notes of the **C2 - Natural Language Processing with Probabilistic Models** of the Natural Language Specialisation.
+Lecture notes of the **C3 - Natural Language Processing with Sequence Models** of the Natural Language Specialisation.
 
 **Note**: These slides haven’t been maintained, and that you might find missing topics and incorrect information in them, as opposed to lecture videos, where we try to update the misinformation or errors as soon as we are aware of them. DeepLearning.Ai encourages that you make your own notes.
 
